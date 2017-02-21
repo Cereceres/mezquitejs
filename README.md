@@ -107,4 +107,5 @@ Default value is {}, here all methods to be availables to be used like '$methodN
 }
 ```
 
-every method is exec with the value mapped until now in the recursive call. 
+every method is exec with the value mapped until now in the recursive call.
+To call the method in mapString you need call it with '$methodName'. It mean with the '$' like prefix. 
