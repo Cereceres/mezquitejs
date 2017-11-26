@@ -68,7 +68,9 @@ assert(mapped.test1 === 'test6');
 Not receive any params to be instanced
 
 ## Mezquite Instance Method
+### mezquite.setMethod(name,method) -> self
 
+set a method to be available in mapped string with name: $name.
 ### mezquite.get(source,map)
 
 Default value are { } for both. Should be objects instance where schema used like:
