@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Cereceres/mezquitejs.svg?branch=master)](https://travis-ci.org/Cereceres/mezquitejs)
+
 # Mezquitejs
 Util to map objects going inside of a object.
 
