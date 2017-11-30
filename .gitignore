@@ -6,6 +6,7 @@ npm-debug.log*
 # Runtime data
 pids
 *.pid
+node_modules
 .vscode
 *.seed
 *.zip
@@ -62,7 +63,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
