@@ -11,6 +11,11 @@ describe('test to mezquitejs', () => {
     let mapped = mezquite.get({'test2': 'test3'}, {'test1': 'test2'});
     assert(mapped.test1 === 'test3');
   });
+
+  it('should map and return undefined', function() {
+    let mapped = mezquite.get('', {'test1': 'test2.test3.test4'});
+    assert(mapped.test1 === undefined);
+  });
   it('should do a loop over all keys given', function() {
     let source = {
       'test2': 'test3',
@@ -50,6 +55,17 @@ describe('test to mezquitejs', () => {
     };
     let mapped = mezquite.get(source, map);
     assert(!mapped.test1);
+  });
+
+  it('should return the value correct with string', function() {
+    let source = {
+      'test2': {
+        test3: undefined
+      }
+    };
+    let map = 'test2.test3.test4';
+    let mapped = mezquite.get(source, map);
+    assert(mapped === undefined);
   });
 
   it('should exec the method given', function(done) {
