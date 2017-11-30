@@ -62,11 +62,11 @@ describe('test to mezquitejs', () => {
       'test1': 'test2.$method.test3.test4'
     };
     let called;
-    mezquite.methods.method = function(mapped) {
+    mezquite.setMethod('method', function(mapped) {
       assert(mapped.test3.test4 === 'test5');
       called = true;
       return mapped;
-    };
+    });
     let mapped = mezquite.get(source, map);
     assert(mapped.test1 === 'test5');
     if (called) done();

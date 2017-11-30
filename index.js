@@ -1,19 +1,16 @@
 const get = require('./lib/get');
-const goInside = require('./lib/go-inside');
 
 const Mezquite = module.exports = function() {
   if (!(this instanceof Mezquite)) return new Mezquite();
 
-  this.methods = {};
+  this.methods = new Map();
   this.setMethod = function(name, method) {
-    if (!name || !mehtod) return this;
+    if (!name || !method || typeof method !== 'function') return this;
 
-    this.methods[name] = method;
+    this.methods.set(name, method);
 
     return this;
   };
 
   this.get = get.bind(this);
 };
-
-Mezquite.goInside = goInside;
