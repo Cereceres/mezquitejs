@@ -4,7 +4,7 @@
   "description": "librery to manage maps between objects",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha --recursive test"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 'use strict';
 const assert = require('assert');
-const Mezquite = require('./index');
+const Mezquite = require('../index');
 const mezquite = new Mezquite();
 describe('test to mezquitejs', () => {
   it('should return a object', function() {
