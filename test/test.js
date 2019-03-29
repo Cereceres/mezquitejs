@@ -9,8 +9,6 @@ describe('test to mezquitejs', () => {
 
   it('should map a object with key given', () => {
     const mapped = mezquite.get({ test2: 'test3' }, { test1: 'test2' });
-    console.log('mapped ', mapped);
-
     assert(mapped.test1 === 'test3');
   });
 
