@@ -1,16 +1,25 @@
+/* eslint-disable func-names */
 const get = require('./lib/get');
 
-const Mezquite = module.exports = function() {
-    if (!(this instanceof Mezquite)) return new Mezquite();
+const Mezquite = function mez() {
+  if (!(this instanceof Mezquite)) return new Mezquite();
 
-    this.methods = new Map();
-    this.setMethod = function(name, method) {
-        if (!name || !method || typeof method !== 'function') return this;
+  this.methods = new Map();
+  this.constants = new Map();
+  this.setMethod = function set(name, method) {
+    if (!name || !method || typeof method !== 'function') return this;
 
-        this.methods.set(name, method);
+    this.methods.set(name, method);
 
-        return this;
-    };
+    return this;
+  };
+  this.setConstant = function (name, constant) {
+    this.constants.set(name, constant);
 
-    this.get = get.bind(this);
+    return this;
+  };
+
+  this.get = get.bind(this);
 };
+
+module.exports = Mezquite;
