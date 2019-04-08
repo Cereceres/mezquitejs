@@ -12,6 +12,16 @@ describe('test to mezquitejs', () => {
     assert(mapped.test1 === 'test3');
   });
 
+  it('should map a object with key given with a array  and join', () => {
+    const mapped = mezquite.get({ test2: 'test3' }, { test1: ['test2', '$join', 'test2'] });
+    assert(mapped.test1 === 'test3test3');
+  });
+
+  it('should map a object with key given with a array and constant', () => {
+    const mapped = mezquite.get({ test2: 'test3' }, { test1: ['test2', '$join', '$$test2'] });
+    assert(mapped.test1 === 'test3test2');
+  });
+
   it('should map and return undefined', () => {
     const mapped = mezquite.get('', { test1: 'test2.test3.test4' });
     assert(mapped.test1 === undefined);

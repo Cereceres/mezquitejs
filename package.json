@@ -1,6 +1,6 @@
 {
   "name": "mezquite",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "library to manage maps between objects",
   "main": "index.js",
   "scripts": {
