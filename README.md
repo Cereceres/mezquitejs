@@ -41,7 +41,7 @@ let map = {
   'test1': 'test2.$method.test3.test4'
 };
 let called;
-mezquite.methods.method = function(mapped) {
+mezquite.setMethod('methodName', function(mapped) {
   // every method receive the value mapped until now
   // mapped = {
   //  test3: {test4: 'test5'}
@@ -59,10 +59,30 @@ mezquite.methods.method = function(mapped) {
   //   test4: 'test6'
   //    }
   // }
-};
+})
 let mapped = mezquite.get(source, map);
 assert(mapped.test1 === 'test6');
-
+mapped = mezquite.get({ test2: 'test3' }, { test1: ['notExists', 'test2'] });
+assert(mapped.test1 === 'test3');
+mezquite.join = (a, b) => b + a;
+mapped = mezquite.get({ test2: 'test3' }, { test1: ['test2', '$$$join', 'test2'] });
+assert(mapped.test1 === 'test3test3');
+mezquite.join = (a, b) => a + b;
+mapped = mezquite.get({ test2: 'test3' }, { test1: ['test2', '$$$join', '$$url'] });
+assert(mapped.test1 === 'test3url');
+mapped = mezquite.get({ test2: 'test3' }, {
+  test1: [
+    '$$url',
+    '$$$join',
+    [
+      'notExists',
+      ['otherNotExists', 'thisOtherOneNeither'],
+      'test2',
+    ],
+  ],
+});
+// iterate in array to find undefined value
+assert(mapped.test1 === 'urltest3');
 ```
 
 # API Documentation
@@ -75,6 +95,7 @@ Not receive any params to be instanced
 ### mezquite.setMethod(name,method) -> self
 
 set a method to be available in mapped string with name: $name.
+
 ### mezquite.get(source,map)
 
 Default value are { } for both. Should be objects instance where schema used like:
@@ -89,29 +110,9 @@ Default value are { } for both. Should be objects instance where schema used lik
 ```
 where mapString = 'map1[.map2.map3]'
 and key is used to build the object mapped.
-#### source:
-```js
-{
-  map: mappedValue
-}
-```
-map in source and map's in map Object must coincide.
-Get method try go inside recursively of mappedValue if mapString has more than one map.
 
+# Interpretation 
 
-## Mezquite Instance Properties
-
-### mezquite.methods
-
-Default value is {}, here all methods to be availables to be used like '$methodName' in map's of map Object should be stored.
-
-#### schema
-
-```js
-{
-  methodName: Function(mapped){}
-}
-```
-
-every method is exec with the value mapped until now in the recursive call.
-To call the method in mapString you need call it with '$methodName'. It mean with the '$' like prefix. 
+$method => Function(currectlyNestedPath)
+$$constant => replaceWithConstant
+$$$operator => Function(first, second, array, instance)
