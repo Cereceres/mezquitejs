@@ -113,6 +113,6 @@ and key is used to build the object mapped.
 
 # Interpretation 
 
-$method => Function(currectlyNestedPath)
-$$constant => replaceWithConstant
-$$$operator => Function(first, second, array, instance)
+    $method => Function(currectlyNestedPath)
+    $$constant => replaceWithConstant
+    $$$operator => Function(first, second, array, instance)
